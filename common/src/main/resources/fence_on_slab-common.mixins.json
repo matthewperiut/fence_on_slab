@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.matthewperiut.fence_on_slab.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "FenceBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

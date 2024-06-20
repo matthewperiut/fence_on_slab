@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "fence_on_slab",
+  "version": "${version}",
+  "name": "Fence On Slab!",
+  "description": "You can finally place fences on slabs!",
+  "authors": [
+    "Slainlight"
+  ],
+  "contact": {
+    "sources": "https://github.com/matthewperiut/fence_on_slab"
+  },
+  "license": "MIT",
+  "icon": "assets/fence_on_slab/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.matthewperiut.fence_on_slab.fabric.FenceOnSlabFabric"
+    ]
+  },
+  "mixins": [
+    "fence_on_slab-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.16.5"
+  }
+}

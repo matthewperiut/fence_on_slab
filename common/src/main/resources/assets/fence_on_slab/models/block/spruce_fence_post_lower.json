@@ -1,0 +1,6 @@
+{
+  "parent": "fence_on_slab:block/fence_post_lower",
+  "textures": {
+    "texture": "minecraft:block/spruce_planks"
+  }
+}

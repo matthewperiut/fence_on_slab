@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.matthewperiut.fence_on_slab.mixin.forge",
+  "package": "com.matthewperiut.fence_on_slab.mixin.neoforge",
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "client": [

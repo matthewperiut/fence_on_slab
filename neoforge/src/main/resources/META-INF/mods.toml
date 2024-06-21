@@ -1,11 +1,11 @@
-modLoader = "javafml"
-loaderVersion = "[36,)"
+modLoader="javafml" #mandatory
+loaderVersion="[2,)" #mandatory
 #issueTrackerURL = ""
 license = "MIT"
 
 [[mods]]
 modId = "fence_on_slab"
-version = "${version}"
+version = "0.1.0"
 displayName = "Fence On Slab!"
 authors = "Slainlight"
 description = '''
@@ -13,16 +13,15 @@ You can finally place fences on slabs!
 '''
 logoFile = "icon.png"
 
-[[dependencies.fence_on_slab]]
-modId = "forge"
-mandatory = true
-versionRange = "[36,)"
-ordering = "NONE"
-side = "BOTH"
+[[mixins]]
+config = "fence_on_slab-common.mixins.json"
 
 [[dependencies.fence_on_slab]]
-modId = "minecraft"
-mandatory = true
-versionRange = "[1.19,1.19.4]"
-ordering = "NONE"
-side = "BOTH"
+modId="minecraft"
+type="required"
+versionRange="[1.20.4]"
+
+[[dependencies.fence_on_slab]]
+modId="neoforge"
+type="required"
+versionRange="[20.4,)"

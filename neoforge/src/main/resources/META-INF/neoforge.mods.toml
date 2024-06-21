@@ -19,9 +19,9 @@ config = "fence_on_slab-common.mixins.json"
 [[dependencies.fence_on_slab]]
 modId="minecraft"
 type="required"
-versionRange="[1.20.4]"
+versionRange="[1.20.5,1.20.6]"
 
 [[dependencies.fence_on_slab]]
 modId="neoforge"
 type="required"
-versionRange="[20.4,)"
+versionRange="[20.5,)"

@@ -1,11 +1,11 @@
 package com.matthewperiut.fence_on_slab.mixin;
 
 import net.minecraft.block.*;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -59,7 +59,7 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
     @Unique
     private boolean isLower(BlockState blockState) {
         if (blockState.getBlock() instanceof SlabBlock)
-            return true;
+            return blockState.get(SlabBlock.TYPE).equals(SlabType.BOTTOM);
         if (blockState.getBlock() instanceof FenceBlock)
             return blockState.get(LOWER);
         else
@@ -102,23 +102,12 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
         }
 
         boolean lower = state.get(LOWER);
+        if (direction.equals(Direction.DOWN)) {
+            lower = isLower(neighborState);
+        }
 
         BlockState blockState = direction.getAxis().getType() == Direction.Type.HORIZONTAL ? (BlockState) state.with((Property) FACING_PROPERTIES.get(direction), sameHalf(lower, neighborState) && this.canConnect(neighborState, neighborState.isSideSolidFullSquare(world, neighborPos, direction.getOpposite()), direction.getOpposite())) : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-        if (direction.equals(Direction.DOWN))
-            if (neighborState.getBlock() instanceof FenceBlock)
-                if (neighborState.get(LOWER))
-                    blockState.with(LOWER, true);
-
-        if (direction.equals(Direction.DOWN)) {
-            if (neighborState.getBlock() instanceof FenceBlock) {
-                if (neighborState.get(LOWER)) {
-                    blockState.with(LOWER, true);
-
-                }
-
-            }
-
-        }
+        blockState.with(LOWER, lower);
         cir.setReturnValue(blockState);
     }
 

@@ -100,7 +100,7 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
             // 1.21
             // world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
             // 1.16.5
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         boolean lower = state.get(LOWER);

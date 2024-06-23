@@ -41,6 +41,8 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
         for (int i = 0; i < boundingShapes.length; i++) {
             lowerBoundingShapes[i] = boundingShapes[i].offset(0, -0.5, 0);
         }
+
+        this.setDefaultState((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(NORTH, false)).with(EAST, false)).with(SOUTH, false)).with(WEST, false)).with(WATERLOGGED, false).with(LOWER, false));
     }
 
 

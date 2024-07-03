@@ -1,0 +1,7 @@
+{
+  "parent": "fence_on_slab:block/custom_fence_post_lower",
+  "textures": {
+    "particle": "minecraft:block/bamboo_fence_particle",
+    "texture": "minecraft:block/bamboo_fence"
+  }
+}

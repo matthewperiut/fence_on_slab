@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static com.matthewperiut.fence_on_slab.FenceOnSlab.FENCE_SLAB_SUPPORT;
 import static com.matthewperiut.fence_on_slab.FenceOnSlab.LOWER;
 
 @Mixin(FenceBlock.class)
@@ -70,6 +71,15 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
 
     @Inject(method = "getPlacementState", at = @At("HEAD"), cancellable = true)
     private void onGetPlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> cir) {
+        try {
+            if (!FENCE_SLAB_SUPPORT.contains(getTranslationKey().split("\\.")[2]))
+                return;
+        } catch (Exception e) {
+            System.out.println("Report to Fence On Slab Github Issues");
+            System.out.println(e.getMessage());
+            return;
+        }
+
         BlockView blockView = ctx.getWorld();
         BlockPos blockPos = ctx.getBlockPos();
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
@@ -96,6 +106,15 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
 
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"), cancellable = true)
     protected void onStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
+        try {
+            if (!FENCE_SLAB_SUPPORT.contains(getTranslationKey().split("\\.")[2]))
+                return;
+        } catch (Exception e) {
+            System.out.println("Report to Fence On Slab Github Issues");
+            System.out.println(e.getMessage());
+            return;
+        }
+
         if ((Boolean)state.get(WATERLOGGED)) {
             // 1.19 - 1.21
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));

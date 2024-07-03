@@ -1,0 +1,100 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/bamboo_fence_post"
+      },
+      "when": {
+        "lower": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "fence_on_slab:block/bamboo_fence_post_lower"
+      },
+      "when": {
+        "lower": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/bamboo_fence_side_north",
+        "uvlock": false
+      },
+      "when": {
+        "north": "true",
+        "lower": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "fence_on_slab:block/bamboo_fence_side_north_lower",
+        "uvlock": false
+      },
+      "when": {
+        "north": "true",
+        "lower": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/bamboo_fence_side_east",
+        "uvlock": false
+      },
+      "when": {
+        "east": "true",
+        "lower": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "fence_on_slab:block/bamboo_fence_side_east_lower",
+        "uvlock": false
+      },
+      "when": {
+        "east": "true",
+        "lower": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/bamboo_fence_side_south",
+        "uvlock": false
+      },
+      "when": {
+        "south": "true",
+        "lower": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "fence_on_slab:block/bamboo_fence_side_south_lower",
+        "uvlock": false
+      },
+      "when": {
+        "south": "true",
+        "lower": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/bamboo_fence_side_west",
+        "uvlock": false
+      },
+      "when": {
+        "west": "true",
+        "lower": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "fence_on_slab:block/bamboo_fence_side_west_lower",
+        "uvlock": false
+      },
+      "when": {
+        "west": "true",
+        "lower": "true"
+      }
+    }
+  ]
+}

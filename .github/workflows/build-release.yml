@@ -48,8 +48,6 @@ jobs:
           curseforge-id: 1042138
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
           files: |
             fabric/build/libs/!(*-@(sources|dev|dev-shadow|javadoc).jar)
 
@@ -59,9 +57,6 @@ jobs:
 
           dependencies: |
             fabric-api(required)
-            architectury-api(required)
-            athena-ctm(required){modrinth:b1ZV3DIJ}{curseforge:841890}
-            chisel-reborn(required)
 
           game-version-filter: releases # Defaults to selecting the latest compatible version of Minecraft, using the tag from the fabric.mod.json
 
@@ -75,8 +70,6 @@ jobs:
           curseforge-id: 1042138
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
           name: '[${{ steps.versions.outputs.minecraft-version }}] NeoForge ${{ steps.versions.outputs.mod-version }}'
           version: 'neoforge-${{ steps.versions.outputs.minecraft-version }}-${{ steps.versions.outputs.mod-version }}'
 
@@ -86,10 +79,5 @@ jobs:
           version-type: release
 
           loaders: neoforge
-
-          dependencies: |
-            architectury-api(required)
-            athena-ctm(required){modrinth:b1ZV3DIJ}{curseforge:841890}
-            chisel-reborn(required)
 
           game-version-filter: releases # Defaults to selecting the latest compatible version of Minecraft, using the tag from the fabric.mod.json

@@ -9,9 +9,12 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -105,7 +108,7 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
     }
 
     @Inject(method = "getStateForNeighborUpdate", at = @At("HEAD"), cancellable = true)
-    protected void onStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
+    protected void onStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random, CallbackInfoReturnable<BlockState> cir) {
         try {
             if (!FENCE_SLAB_SUPPORT.contains(getTranslationKey().split("\\.")[2]))
                 return;
@@ -116,8 +119,10 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
         }
 
         if ((Boolean)state.get(WATERLOGGED)) {
+            // 1.21.2+
+            tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
             // 1.19 - 1.21
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            // world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
             // 1.18
             //world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
             // 1.16.5
@@ -129,7 +134,7 @@ abstract public class FenceBlockMixin extends HorizontalConnectingBlock {
             lower = isLower(neighborState);
         }
 
-        BlockState blockState = direction.getAxis().getType() == Direction.Type.HORIZONTAL ? (BlockState) state.with((Property) FACING_PROPERTIES.get(direction), sameHalf(lower, neighborState) && this.canConnect(neighborState, neighborState.isSideSolidFullSquare(world, neighborPos, direction.getOpposite()), direction.getOpposite())) : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        BlockState blockState = direction.getAxis().getType() == Direction.Type.HORIZONTAL ? (BlockState) state.with((Property) FACING_PROPERTIES.get(direction), sameHalf(lower, neighborState) && this.canConnect(neighborState, neighborState.isSideSolidFullSquare(world, neighborPos, direction.getOpposite()), direction.getOpposite())) : super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
         blockState.with(LOWER, lower);
         cir.setReturnValue(blockState);
     }

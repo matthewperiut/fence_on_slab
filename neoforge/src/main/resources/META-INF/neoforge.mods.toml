@@ -5,7 +5,7 @@ license = "MIT"
 
 [[mods]]
 modId = "fence_on_slab"
-version = "0.1.0"
+version = "${version}"
 displayName = "Fence On Slab!"
 authors = "Slainlight"
 description = '''
@@ -19,7 +19,7 @@ config = "fence_on_slab-common.mixins.json"
 [[dependencies.fence_on_slab]]
 modId="minecraft"
 type="required"
-versionRange="[1.21,1.22)"
+versionRange="[1.21.2,1.21.3]"
 
 [[dependencies.fence_on_slab]]
 modId="neoforge"
